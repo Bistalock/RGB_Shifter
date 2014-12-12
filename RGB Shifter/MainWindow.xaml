@@ -1,0 +1,52 @@
+﻿<Window x:Class="RGB_Shifter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RGB Shifter" Height="283" Width="734" ResizeMode="CanMinimize" Closed="Window_Closed">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Load Image" Height="68" Margin="10,10,10,0" VerticalAlignment="Top">
+            <Grid>
+                <Label Content="Tiff Image:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" ToolTip="The color Tiff image to be processed.&#xA;Drag and drop function is supported."/>
+                <TextBox x:Name="textBox" Height="23" Margin="81,10,124,0" VerticalAlignment="Top" PreviewDragEnter="TextBox_PreviewDragEnter" PreviewDragOver="TextBox_PreviewDragOver" PreviewDrop="TextBox_PreviewDrop"/>
+                <Button x:Name="loadImageButton" Content="Load Image. . ." HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Padding="10,2" Click="loadImageButton_Click" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" ToolTip="Load the TIFF image."/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="previewButton" Content="Preview. . ." HorizontalAlignment="Right" Margin="0,210,113,0" VerticalAlignment="Top" Padding="10,2" Click="previewButton_Click" ToolTip="See how the image would look like without saving the result to the disk."/>
+        <Button x:Name="processImageButton" Content="Process Image" HorizontalAlignment="Right" Margin="0,210,10,0" VerticalAlignment="Top" Padding="10,2" Click="processImageButton_Click" ToolTip="Process the given image from parameters entered than saved to the disk."/>
+        <GroupBox Header="Shift Size" Margin="250,93,265,0" VerticalAlignment="Top" Height="100">
+            <Grid>
+                <Label x:Name="label1" Content="Vertical:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" ToolTip="The vertical shift in pixels for the color channels."/>
+                <Label x:Name="label2" Content="Horizontal:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,41,0,0" ToolTip="The horizontal shift in pixels for the color channels."/>
+                <TextBox x:Name="textBox1" Height="23" Margin="98,10,22,0" VerticalAlignment="Top" SpellCheck.IsEnabled="True"/>
+                <TextBox x:Name="textBox2" Height="23" Margin="98,44,22,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Shift Orientation" Margin="10,93,483,0" VerticalAlignment="Top" Height="100">
+            <Grid>
+                <CheckBox Content="Shift Individual Channels" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" ToolTip="Check to process each color chanel individually." IsEnabled="False"/>
+                <Label Content="Shift:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" ToolTip="Changes the offset orientation."/>
+                <ComboBox x:Name="shiftComboBox" HorizontalAlignment="Left" Margin="61,40,0,0" VerticalAlignment="Top" Width="128" ToolTip="Changes the offset orientation." SelectionChanged="shiftComboBox_SelectionChanged">
+                    <ComboBoxItem Content="Vertical Shift"/>
+                    <ComboBoxItem Content="Horizontal Shift"/>
+                    <ComboBoxItem Content="Uphill Shift"/>
+                    <ComboBoxItem Content="Downhill Shift"/>
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Color Order" Margin="468,93,10,0" VerticalAlignment="Top" Height="100">
+            <Grid>
+                <Label Content="Offset:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" ToolTip="The color shift order."/>
+                <ComboBox x:Name="offsetComboBox" HorizontalAlignment="Left" Margin="60,34,0,0" VerticalAlignment="Top" Width="143" ToolTip="The color shift order.">
+                    <ComboBoxItem Content="Red &gt; Green &gt; Blue"/>
+                    <ComboBoxItem Content="Red &gt; Blue &gt; Green" IsEnabled="False"/>
+                    <ComboBoxItem Content="Green &gt; Red &gt; Blue" IsEnabled="False"/>
+                    <ComboBoxItem Content="Green &gt; Blue &gt; Red" IsEnabled="False"/>
+                    <ComboBoxItem Content="Blue &gt; Green &gt; Red"/>
+                    <ComboBoxItem Content="Blue &gt; Red &gt; Green" IsEnabled="False"/>
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
