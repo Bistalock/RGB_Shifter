@@ -27,7 +27,7 @@ namespace RGB_Shifter
     public partial class MainWindow : Window
     {
         // Importing the C++ MirrorImage dynamic link library with a P/Invoke call
-        [DllImport("MirrorImage.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+        [DllImport("Mirror Image.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         public static extern IntPtr mirrorImage([In, Out] byte[] inputImageBuffer, int height, int width, int samples, int kernelHeight, int kernelWidth);
 
         public MainWindow()
