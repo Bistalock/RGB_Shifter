@@ -366,8 +366,16 @@ namespace RGB_Shifter
 
             if (samples == 1)
             {
-                MessageBoxResult result = MessageBox.Show("The image entered is grayscale. This will cause a the image to shift to the orientation provided.\n\nDo you wish to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("The image entered is grayscale. This will cause the image entered to shift to the orientation provided.\n\nDo you wish to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+            else if (samples == 4)
+            {
+                MessageBoxResult result = MessageBox.Show("This program does not support alpha channels.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (result == MessageBoxResult.OK)
                 {
                     return;
                 }
@@ -470,7 +478,7 @@ namespace RGB_Shifter
             int width = image.GetField(TiffTag.IMAGEWIDTH)[0].ToInt();
             int height = image.GetField(TiffTag.IMAGELENGTH)[0].ToInt();
             byte bits = image.GetField(TiffTag.BITSPERSAMPLE)[0].ToByte();
-            byte samples = image.GetField(TiffTag.SAMPLESPERPIXEL)[0].ToByte();            
+            byte samples = image.GetField(TiffTag.SAMPLESPERPIXEL)[0].ToByte();
 
             // store the image information in 2d byte array
             // reserve memory for storing the size of 1 line
@@ -585,7 +593,7 @@ namespace RGB_Shifter
                 if (offsetComboBox.SelectedIndex == 0)
                 {
                     hShift = 1;
-                    vShift = -1;
+                    vShift = -1;                    
                 }
                 // Red, Blue, Green
                 else if (offsetComboBox.SelectedIndex == 1)
@@ -685,8 +693,17 @@ namespace RGB_Shifter
                 }
             }
 
+            int shiftHeight = 0;
+
             // the kernel window to be used
-            int shiftHeight = Convert.ToInt32(textBox1.Text) * 3;
+            if (shiftComboBox.SelectedIndex == 1)
+            {
+                shiftHeight = 0;
+            }
+            else
+            {
+                shiftHeight = Convert.ToInt32(textBox1.Text) * 3;
+            }
 
 
             if (textBox2.Text == "" && shiftComboBox.SelectedIndex != 0)
@@ -699,12 +716,29 @@ namespace RGB_Shifter
                 }
             }
 
-            int shiftWidth = Convert.ToInt32(textBox2.Text) * 3;
+            int shiftWidth = 0;
+
+            if (shiftComboBox.SelectedIndex == 0)
+            {
+                shiftWidth = 0;
+            }
+            else
+            {
+                shiftWidth = Convert.ToInt32(textBox2.Text) * 3;
+            }
 
             if (samples == 1)
             {
-                MessageBoxResult result = MessageBox.Show("The image entered is grayscale. This will cause a the image to shift to the orientation provided.\n\nDo you wish to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("The image entered is grayscale. This will cause the image entered to shift to the orientation provided.\n\nDo you wish to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+            else if (samples == 4)
+            {
+                MessageBoxResult result = MessageBox.Show("This program does not support alpha channels.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (result == MessageBoxResult.OK)
                 {
                     return;
                 }
