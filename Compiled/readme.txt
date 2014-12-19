@@ -4,7 +4,4 @@
   To do this,
 
    - Make program distributed through an MSI Intallation
-   - create uninstall.exe
    - if not, create the "Microsoft.VC110.CRT" folder with dll and manifest
-   - Keep readme file?
-   - Maybe add a change.log file

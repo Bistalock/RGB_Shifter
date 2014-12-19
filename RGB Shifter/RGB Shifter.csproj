@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>RGBShift2.ico</ApplicationIcon>
+    <ApplicationIcon>RGBShift.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -112,9 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="RGBShift.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="RGBShift2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
