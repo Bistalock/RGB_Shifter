@@ -40,11 +40,11 @@
                 <Label Content="Offset:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" ToolTip="The color shift order."/>
                 <ComboBox x:Name="offsetComboBox" HorizontalAlignment="Left" Margin="60,34,0,0" VerticalAlignment="Top" Width="143" ToolTip="The color shift order.">
                     <ComboBoxItem Content="Red &gt; Green &gt; Blue"/>
-                    <ComboBoxItem Content="Red &gt; Blue &gt; Green" IsEnabled="False"/>
-                    <ComboBoxItem Content="Green &gt; Red &gt; Blue" IsEnabled="False"/>
-                    <ComboBoxItem Content="Green &gt; Blue &gt; Red" IsEnabled="False"/>
+                    <ComboBoxItem Content="Red &gt; Blue &gt; Green"/>
+                    <ComboBoxItem Content="Green &gt; Red &gt; Blue"/>
+                    <ComboBoxItem Content="Green &gt; Blue &gt; Red"/>
                     <ComboBoxItem Content="Blue &gt; Green &gt; Red"/>
-                    <ComboBoxItem Content="Blue &gt; Red &gt; Green" IsEnabled="False"/>
+                    <ComboBoxItem Content="Blue &gt; Red &gt; Green"/>
                 </ComboBox>
             </Grid>
         </GroupBox>

@@ -134,191 +134,7 @@ namespace RGB_Shifter
                     // writing the entire image as a 1 dimentional integer buffer.
                     inputImageBuffer[image.ScanlineSize() * i + j] = scanline[j];
                 }
-            } // end grabbing intensity values   
-
-            int vShift = 0;
-            int hShift = 0;
-
-            // Vertical Shift
-            if (shiftComboBox.SelectedIndex == 0)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    vShift = 1;
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    vShift = -1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    vShift = 1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    vShift = 1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    vShift = -1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    vShift = 1;
-                }
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        return;
-                    }
-                }
-            }
-            // Horizontal Shift
-            else if (shiftComboBox.SelectedIndex == 1)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    hShift = 1;
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    hShift = -1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    hShift = 1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    hShift = 1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    hShift = -1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    hShift = 1;
-                }
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        return;
-                    }
-                }
-            }
-            // Uphill Shift
-            else if (shiftComboBox.SelectedIndex == 2)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    hShift = 1;
-                    vShift = -1;                    
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    hShift = -1;
-                    vShift = 1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        return;
-                    }
-                }
-            }
-            // Downhill Shift
-            else if (shiftComboBox.SelectedIndex == 3)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    hShift = -1;
-                    vShift = -1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-            }
-            else
-            {
-                MessageBoxResult result = MessageBox.Show("No shift orientation entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                if (result == MessageBoxResult.OK)
-                {
-                    return;
-                }
-            }
+            } // end grabbing intensity values              
 
             if (textBox1.Text == "" && shiftComboBox.SelectedIndex != 1)
             {
@@ -364,6 +180,291 @@ namespace RGB_Shifter
                 shiftWidth = Convert.ToInt32(textBox2.Text) * 3;
             }
 
+            int offsetHeight = (shiftHeight - 3) / 2 + 1; // calculation of the center 
+            int offsetWidth = (shiftWidth - 3) / 2 + 1; // calculation of the center  
+
+            int redShiftWidth = 0;
+            int redShiftHeight = 0;
+
+            int greenShiftWidth = 0;
+            int greenShiftHeight = 0;
+
+            int blueShiftWidth = 0;
+            int blueShiftHeight = 0;
+
+            // Vertical Shift
+            if (shiftComboBox.SelectedIndex == 0)
+            {
+                // Red, Green, Blue * ----- Working! ------- *
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftHeight = 0;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Blue, Green, Red * ----- Working! ------- *
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftHeight = 0;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = offsetHeight;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            // Horizontal Shift
+            else if (shiftComboBox.SelectedIndex == 1)
+            {
+                // Red, Green, Blue * ----- Working! ------- *
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = -offsetWidth * samples;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = -offsetWidth * samples;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = 0;
+                }
+                // Blue, Green, Red * ----- Working! ------- *
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = offsetWidth * samples;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = offsetWidth * samples;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            // Uphill Shift
+            else if (shiftComboBox.SelectedIndex == 2)
+            {
+                // Red, Green, Blue * ----- Working! ------- *
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Blue, Green, Red * ----- Working! ------- *
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = -offsetHeight;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            // Downhill Shift
+            else if (shiftComboBox.SelectedIndex == 3)
+            {
+                // Red, Green, Blue
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Blue, Green, Red
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = offsetHeight;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("No shift orientation entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (result == MessageBoxResult.OK)
+                {
+                    return;
+                }
+            }
+
             if (samples == 1)
             {
                 MessageBoxResult result = MessageBox.Show("The image entered is grayscale. This will cause the image entered to shift to the orientation provided.\n\nDo you wish to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -386,10 +487,7 @@ namespace RGB_Shifter
 
             Title = "RGB Shifter (Working)";
             previewButton.IsEnabled = false;
-            processImageButton.IsEnabled = false;
-
-            int offsetHeight = (shiftHeight - 3) / 2 + 1; // calculation of the center 
-            int offsetWidth = (shiftWidth - 3) / 2 + 1; // calculation of the center  
+            processImageButton.IsEnabled = false;           
 
             // Mirrorimage before the creation of the kernelTh
             int MirroredHeight = height + (offsetHeight * 2);
@@ -411,8 +509,8 @@ namespace RGB_Shifter
             #region Preview Image
 
 
-            int colorshiftWidth = hShift * offsetWidth * samples;
-            int colorshiftHeight = vShift * offsetHeight;
+            //int colorshiftWidth = hShift * offsetWidth * samples;
+            //int colorshiftHeight = vShift * offsetHeight;
 
             // loop is [height,width,samples] because of how Tiff scanlines work
             for (int i = offsetHeight; i < MirroredHeight - offsetHeight; i++)
@@ -421,14 +519,20 @@ namespace RGB_Shifter
                 {
 
                     for (int k = 0; k < samples; k++)
-                    {
-                        processedImageBuffer[((samples * width) * (i - offsetHeight)) + (samples * (j - offsetWidth)) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + colorshiftHeight)) + (samples * j) + k + colorshiftWidth]; // saving the resulting image to file
-                        colorshiftWidth = colorshiftWidth + -hShift * offsetWidth * samples;
-                        colorshiftHeight = colorshiftHeight + -vShift * offsetHeight;
+                    {     
+                        if (k == 0)
+                        {
+                            processedImageBuffer[((samples * width) * (i - offsetHeight)) + (samples * (j - offsetWidth)) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + redShiftHeight)) + (samples * j) + k + redShiftWidth]; // saving the resulting image to file
+                        }
+                        if (k == 1)
+                        {
+                            processedImageBuffer[((samples * width) * (i - offsetHeight)) + (samples * (j - offsetWidth)) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + greenShiftHeight)) + (samples * j) + k + greenShiftWidth]; // saving the resulting image to file                        
+                        }
+                        if (k == 2)
+                        {
+                            processedImageBuffer[((samples * width) * (i - offsetHeight)) + (samples * (j - offsetWidth)) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + blueShiftHeight)) + (samples * j) + k + blueShiftWidth]; // saving the resulting image to file
+                        }
                     }
-                    colorshiftWidth = hShift * offsetWidth * samples;
-                    colorshiftHeight = vShift * offsetHeight;
-
                 }
             }
             PixelFormat pixelFormat;
@@ -497,191 +601,7 @@ namespace RGB_Shifter
                     // writing the entire image as a 1 dimentional integer buffer.
                     inputImageBuffer[image.ScanlineSize() * i + j] = scanline[j];
                 }
-            } // end grabbing intensity values   
-
-            int vShift = 0;
-            int hShift = 0;
-
-            // Vertical Shift
-            if (shiftComboBox.SelectedIndex == 0)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    vShift = 1;
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    vShift = -1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    vShift = 1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    vShift = 1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    vShift = -1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    vShift = 1;
-                }
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        return;
-                    }
-                }
-            }
-            // Horizontal Shift
-            else if (shiftComboBox.SelectedIndex == 1)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    hShift = 1;
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    hShift = -1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    hShift = 1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    hShift = 1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    hShift = -1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    hShift = 1;
-                }
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        return;
-                    }
-                }
-            }
-            // Uphill Shift
-            else if (shiftComboBox.SelectedIndex == 2)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    hShift = 1;
-                    vShift = -1;                    
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    hShift = -1;
-                    vShift = 1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    hShift = 1;
-                    vShift = -1;
-                }
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        return;
-                    }
-                }
-            }
-            // Downhill Shift
-            else if (shiftComboBox.SelectedIndex == 3)
-            {
-                // Red, Green, Blue * ----- Working! ------- *
-                if (offsetComboBox.SelectedIndex == 0)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Red, Blue, Green
-                else if (offsetComboBox.SelectedIndex == 1)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Green, Red, Blue
-                else if (offsetComboBox.SelectedIndex == 2)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Green, Blue, Red
-                else if (offsetComboBox.SelectedIndex == 3)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-                // Blue, Green, Red * ----- Working! ------- *
-                else if (offsetComboBox.SelectedIndex == 4)
-                {
-                    hShift = -1;
-                    vShift = -1;
-                }
-                // Blue, Red, Green
-                else if (offsetComboBox.SelectedIndex == 5)
-                {
-                    hShift = 1;
-                    vShift = 1;
-                }
-            }
-            else
-            {
-                MessageBoxResult result = MessageBox.Show("No shift orientation entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                if (result == MessageBoxResult.OK)
-                {
-                    return;
-                }
-            }
+            } // end grabbing intensity values              
 
             if (textBox1.Text == "" && shiftComboBox.SelectedIndex != 1)
             {
@@ -727,6 +647,291 @@ namespace RGB_Shifter
                 shiftWidth = Convert.ToInt32(textBox2.Text) * 3;
             }
 
+            int offsetHeight = (shiftHeight - 3) / 2 + 1; // calculation of the center 
+            int offsetWidth = (shiftWidth - 3) / 2 + 1; // calculation of the center  
+
+            int redShiftWidth = 0;
+            int redShiftHeight = 0;
+
+            int greenShiftWidth = 0;
+            int greenShiftHeight = 0;
+
+            int blueShiftWidth = 0;
+            int blueShiftHeight = 0;
+
+            // Vertical Shift
+            if (shiftComboBox.SelectedIndex == 0)
+            {
+                // Red, Green, Blue
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftHeight = 0;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Blue, Green, Red
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftHeight = 0;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = offsetHeight;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            // Horizontal Shift
+            else if (shiftComboBox.SelectedIndex == 1)
+            {
+                // Red, Green, Blue
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = -offsetWidth * samples;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = -offsetWidth * samples;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = 0;
+                }
+                // Blue, Green, Red
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = offsetWidth * samples;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = offsetWidth * samples;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            // Uphill Shift
+            else if (shiftComboBox.SelectedIndex == 2)
+            {
+                // Red, Green, Blue
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Blue, Green, Red
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = -offsetHeight;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            // Downhill Shift
+            else if (shiftComboBox.SelectedIndex == 3)
+            {
+                // Red, Green, Blue
+                if (offsetComboBox.SelectedIndex == 0)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Red, Blue, Green
+                else if (offsetComboBox.SelectedIndex == 1)
+                {
+                    redShiftWidth = offsetWidth * samples;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = offsetHeight;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Green, Red, Blue
+                else if (offsetComboBox.SelectedIndex == 2)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = -offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = -offsetHeight;
+                }
+                // Green, Blue, Red
+                else if (offsetComboBox.SelectedIndex == 3)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = offsetWidth * samples;
+                    blueShiftWidth = 0;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = offsetHeight;
+                    blueShiftHeight = 0;
+                }
+                // Blue, Green, Red
+                else if (offsetComboBox.SelectedIndex == 4)
+                {
+                    redShiftWidth = -offsetWidth * samples;
+                    greenShiftWidth = 0;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = -offsetHeight;
+                    greenShiftHeight = 0;
+                    blueShiftHeight = offsetHeight;
+                }
+                // Blue, Red, Green
+                else if (offsetComboBox.SelectedIndex == 5)
+                {
+                    redShiftWidth = 0;
+                    greenShiftWidth = -offsetWidth * samples;
+                    blueShiftWidth = offsetWidth * samples;
+
+                    redShiftHeight = 0;
+                    greenShiftHeight = -offsetHeight;
+                    blueShiftHeight = offsetHeight;
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("No color order entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("No shift orientation entered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (result == MessageBoxResult.OK)
+                {
+                    return;
+                }
+            }
+
             if (samples == 1)
             {
                 MessageBoxResult result = MessageBox.Show("The image entered is grayscale. This will cause the image entered to shift to the orientation provided.\n\nDo you wish to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -750,9 +955,6 @@ namespace RGB_Shifter
             Title = "RGB Shifter (Working)";
             previewButton.IsEnabled = false;
             processImageButton.IsEnabled = false;
-
-            int offsetHeight = (shiftHeight - 3) / 2 + 1; // calculation of the center 
-            int offsetWidth = (shiftWidth - 3) / 2 + 1; // calculation of the center  
 
             // Mirrorimage before the creation of the kernelTh
             int MirroredHeight = height + (offsetHeight * 2);
@@ -813,9 +1015,6 @@ namespace RGB_Shifter
                     byte[] buffer = new byte[width * samples];
                     // obtain each line of the final byte arrays and write them to a file
 
-                    int colorshiftWidth = hShift * offsetWidth * samples;
-                    int colorshiftHeight = vShift * offsetHeight;
-
                     // loop is [height,width,samples] because of how Tiff scanlines work
                     for (int i = offsetHeight; i < MirroredHeight - offsetHeight; i++)
                     {
@@ -824,13 +1023,19 @@ namespace RGB_Shifter
 
                             for (int k = 0; k < samples; k++)
                             {
-                                buffer[samples * (j - offsetWidth) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + colorshiftHeight)) + (samples * j) + k + colorshiftWidth]; // saving the resulting image to file
-                                colorshiftWidth = colorshiftWidth + -hShift * offsetWidth * samples;
-                                colorshiftHeight = colorshiftHeight + -vShift * offsetHeight;
+                                if (k == 0)
+                                {
+                                    buffer[samples * (j - offsetWidth) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + redShiftHeight)) + (samples * j) + k + redShiftWidth]; // saving the resulting image to file
+                                }
+                                if (k == 1)
+                                {
+                                    buffer[samples * (j - offsetWidth) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + greenShiftHeight)) + (samples * j) + k + greenShiftWidth]; // saving the resulting image to file                        
+                                }
+                                if (k == 2)
+                                {
+                                    buffer[samples * (j - offsetWidth) + k] = mirrorImageBuffer[((samples * MirroredWidth) * (i + blueShiftHeight)) + (samples * j) + k + blueShiftWidth]; // saving the resulting image to file
+                                }
                             }
-                            colorshiftWidth = hShift * offsetWidth * samples;
-                            colorshiftHeight = vShift * offsetHeight;
-
                         }
                         // write
                         if (samples == 1) output.WriteScanline(buffer, i - offsetHeight);
